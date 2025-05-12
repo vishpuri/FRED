@@ -1,0 +1,51 @@
+{
+  "name": "fred-mcp-server",
+  "version": "0.1.0",
+  "description": "Federal Reserve Economic Data (FRED) MCP Server for fetching economic timeseries data",
+  "main": "build/index.js",
+  "keywords": [
+    "fred",
+    "federal-reserve",
+    "economic-data",
+    "timeseries",
+    "financial-data",
+    "model-context-protocol",
+    "mcp"
+  ],
+  "type": "module",
+  "bin": {
+    "fred": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod 755 build/index.js",
+    "start": "node build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "author": {
+    "name": "Stefano Amorelli",
+    "email": "stefano@amorelli.tech",
+    "url": "https://amorelli.tech"
+  },
+  "homepage": "https://github.com/stefanoamorelli/fred-mcp-server#README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanoamorelli/fred-mcp-server"
+  },
+  "bugs": {
+    "url": "https://github.com/stefanoamorelli/fred-mcp-server/issues",
+    "email": "stefano@amorelli.tech"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.11.2",
+    "node-fetch": "^3.3.2",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39"
+}
