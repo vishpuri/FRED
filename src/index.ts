@@ -2,11 +2,20 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { handleRRPONTSYD } from "./tools/RRPONTSYD.js";
 import { z } from "zod";
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+// Get package.json version
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const packageJsonPath = join(__dirname, "..", "package.json");
+const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
 
 // Create server instance with detailed description
 const server = new McpServer({
   name: "fred",
-  version: "0.1.0",
+  version: packageJson.version,
   description: "Federal Reserve Economic Data (FRED) MCP Server for retrieving economic data series"
 });
 
