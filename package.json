@@ -18,7 +18,8 @@
   },
   "scripts": {
     "build": "tsc && chmod 755 build/index.js",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "release": "release-it"
   },
   "files": [
     "build"
@@ -44,6 +45,7 @@
     "zod": "^3.24.4"
   },
   "devDependencies": {
+    "release-it": "^19.0.0",
     "@types/node": "^22.15.17",
     "typescript": "^5.8.3"
   },
