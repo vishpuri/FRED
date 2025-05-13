@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { handleRRPONTSYD } from "./tools/RRPONTSYD.js";
+import { handleCPIAUCSL } from "./tools/CPIAUCSL.js";
 import { z } from "zod";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
@@ -34,6 +35,25 @@ server.tool(
     console.error(`RRPONTSYD tool called with params: ${JSON.stringify(input)}`);
     const result = await handleRRPONTSYD(input);
     console.error("RRPONTSYD tool handling complete");
+    return result;
+  }
+);
+
+// Register the CPIAUCSL tool
+server.tool(
+  "CPIAUCSL",
+  "Retrieve data for Consumer Price Index for All Urban Consumers (CPIAUCSL) from FRED",
+  {
+    start_date: z.string().optional().describe("Start date in YYYY-MM-DD format"),
+    end_date: z.string().optional().describe("End date in YYYY-MM-DD format"),
+    limit: z.number().optional().describe("Maximum number of observations to return"),
+    sort_order: z.enum(["asc", "desc"]).optional().describe("Sort order of observations")
+  },
+  // Add explicit logging to the handler
+  async (input) => {
+    console.error(`CPIAUCSL tool called with params: ${JSON.stringify(input)}`);
+    const result = await handleCPIAUCSL(input);
+    console.error("CPIAUCSL tool handling complete");
     return result;
   }
 );
