@@ -18,6 +18,13 @@ A Model Context Protocol (`MCP`) server for accessing Federal Reserve Economic D
 
 ---
 
+
+> [!TIP]
+> If you use this project in your research or work, please cite it using the [CITATION.cff](CITATION.cff) file, or the APA format below:
+
+`Amorelli, S. (2025). Federal Reserve Economic Data MCP (Model Context Protocol) Server [Computer software]. GitHub. https://github.com/stefanoamorelli/fred-mcp-server`
+
+
 ## Installation
 
 1.  Clone the repository:
