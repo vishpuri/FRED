@@ -1,6 +1,6 @@
 {
   "name": "fred-mcp-server",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Federal Reserve Economic Data (FRED) MCP Server for fetching economic timeseries data",
   "main": "build/index.js",
   "keywords": [
