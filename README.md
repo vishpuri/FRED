@@ -67,6 +67,15 @@ Install the server, for example, on [Claude Desktop](https://claude.ai/download)
     *   `limit` _(number, optional)_: Maximum number of observations to return.
     *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
 
+### `CPIAUCSL`
+
+*   **Description**: Retrieve data for *Consumer Price Index for All Urban Consumers* (`CPIAUCSL`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
 ## 📄 License
 
 [Apache 2.0 License](LICENSE) © 2025 [Stefano Amorelli](https://amorelli.tech)
