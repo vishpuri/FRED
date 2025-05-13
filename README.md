@@ -51,8 +51,8 @@ Install the server, for example, on [Claude Desktop](https://claude.ai/download)
       "env": {
         "FRED_API_KEY": "<YOUR_API_KEY>"
       }
-    },
-  },
+    }
+  }
 }
 ```
 
