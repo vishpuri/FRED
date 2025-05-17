@@ -1,8 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { handleRRPONTSYD } from "./tools/RRPONTSYD.js";
-import { handleCPIAUCSL } from "./tools/CPIAUCSL.js";
-import { z } from "zod";
+import { registerSeriesTool, registerDynamicSeriesTool } from "./fred/tools.js";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
@@ -13,52 +11,33 @@ const __dirname = dirname(__filename);
 const packageJsonPath = join(__dirname, "..", "package.json");
 const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
 
-// Create server instance with detailed description
+/**
+ * Main FRED MCP Server
+ * 
+ * Provides access to Federal Reserve Economic Data through the
+ * Model Context Protocol
+ */
 const server = new McpServer({
   name: "fred",
   version: packageJson.version,
   description: "Federal Reserve Economic Data (FRED) MCP Server for retrieving economic data series"
 });
 
-// Register the RRPONTSYD tool
-server.tool(
-  "RRPONTSYD",
-  "Retrieve data for Overnight Reverse Repurchase Agreements (RRPONTSYD) from FRED",
-  {
-    start_date: z.string().optional().describe("Start date in YYYY-MM-DD format"),
-    end_date: z.string().optional().describe("End date in YYYY-MM-DD format"),
-    limit: z.number().optional().describe("Maximum number of observations to return"),
-    sort_order: z.enum(["asc", "desc"]).optional().describe("Sort order of observations")
-  },
-  // Add explicit logging to the handler
-  async (input) => {
-    console.error(`RRPONTSYD tool called with params: ${JSON.stringify(input)}`);
-    const result = await handleRRPONTSYD(input);
-    console.error("RRPONTSYD tool handling complete");
-    return result;
-  }
-);
+// Register individual series tools
+registerSeriesTool(server, "RRPONTSYD");  // Overnight Reverse Repurchase Agreements
+registerSeriesTool(server, "CPIAUCSL");   // Consumer Price Index
 
-// Register the CPIAUCSL tool
-server.tool(
-  "CPIAUCSL",
-  "Retrieve data for Consumer Price Index for All Urban Consumers (CPIAUCSL) from FRED",
-  {
-    start_date: z.string().optional().describe("Start date in YYYY-MM-DD format"),
-    end_date: z.string().optional().describe("End date in YYYY-MM-DD format"),
-    limit: z.number().optional().describe("Maximum number of observations to return"),
-    sort_order: z.enum(["asc", "desc"]).optional().describe("Sort order of observations")
-  },
-  // Add explicit logging to the handler
-  async (input) => {
-    console.error(`CPIAUCSL tool called with params: ${JSON.stringify(input)}`);
-    const result = await handleCPIAUCSL(input);
-    console.error("CPIAUCSL tool handling complete");
-    return result;
-  }
-);
+// To add more series, simply add them here:
+// registerSeriesTool(server, "GDPC1");    // Gross Domestic Product
+// registerSeriesTool(server, "UNRATE");   // Unemployment Rate
+// registerSeriesTool(server, "FEDFUNDS"); // Federal Funds Rate
 
-// Run server with connect method and proper error handling
+// Register the dynamic series lookup tool
+registerDynamicSeriesTool(server);
+
+/**
+ * Start the MCP server
+ */
 async function main() {
   console.error("FRED MCP Server starting...");
   const transport = new StdioServerTransport();
