@@ -83,6 +83,123 @@ Install the server, for example, on [Claude Desktop](https://claude.ai/download)
     *   `limit` _(number, optional)_: Maximum number of observations to return.
     *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
 
+### `MORTGAGE30US`
+
+*   **Description**: Retrieve data for *30-Year Fixed Rate Mortgage Average in the United States* (`MORTGAGE30US`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
+### `T10Y2Y`
+
+*   **Description**: Retrieve data for *10-Year Treasury Constant Maturity Minus 2-Year Treasury Constant Maturity* (`T10Y2Y`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
+### `UNRATE`
+
+*   **Description**: Retrieve data for *Unemployment Rate* (`UNRATE`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
+### `WALCL`
+
+*   **Description**: Retrieve data for *Federal Reserve Total Assets* (`WALCL`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
+### `GDP`
+
+*   **Description**: Retrieve data for *Gross Domestic Product* (`GDP`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
+### `GDPC1`
+
+*   **Description**: Retrieve data for *Real Gross Domestic Product* (`GDPC1`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
+### `DGS10`
+
+*   **Description**: Retrieve data for *10-Year Treasury Constant Maturity Rate* (`DGS10`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
+### `CSUSHPINSA`
+
+*   **Description**: Retrieve data for *S&P/Case-Shiller U.S. National Home Price Index* (`CSUSHPINSA`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
+### `BAMLH0A0HYM2`
+
+*   **Description**: Retrieve data for *ICE BofA US High Yield Index Option-Adjusted Spread* (`BAMLH0A0HYM2`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
+### `T10YIE`
+
+*   **Description**: Retrieve data for *10-Year Breakeven Inflation Rate* (`T10YIE`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
+### `FPCPITOTLZGUSA`
+
+*   **Description**: Retrieve data for *Inflation, consumer prices for the United States* (`FPCPITOTLZGUSA`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
+### `MSPUS`
+
+*   **Description**: Retrieve data for *Median Sales Price of Houses Sold for the United States* (`MSPUS`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
+### `M1SL`
+
+*   **Description**: Retrieve data for *M1 Money Stock* (`M1SL`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
 ## 📄 License
 
 [Apache 2.0 License](LICENSE) © 2025 [Stefano Amorelli](https://amorelli.tech)
