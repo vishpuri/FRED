@@ -70,3 +70,101 @@ export const SeriesObservationsResponseSchema = z.object({
 // Export types based on the schemas
 export type Observation = z.infer<typeof ObservationSchema>;
 export type SeriesObservationsResponse = z.infer<typeof SeriesObservationsResponseSchema>;
+
+/**
+ * Metadata for FRED economic data series
+ */
+export interface FREDSeriesMetadata {
+  title: string;
+  description: string;
+  units: string;
+}
+
+/**
+ * Registry of known FRED series with their metadata
+ * Key: series ID as used in FRED API
+ * Value: human-readable metadata about the series
+ */
+export const FRED_SERIES_REGISTRY: Record<string, FREDSeriesMetadata> = {
+  "CPIAUCSL": {
+    title: "Consumer Price Index for All Urban Consumers: All Items in U.S. City Average",
+    description: "The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a measure of the average monthly change in the price for goods and services paid by urban consumers between any two time periods.",
+    units: "Index 1982-1984=100"
+  },
+  "RRPONTSYD": {
+    title: "Overnight Reverse Repurchase Agreements: Treasury Securities Sold by the Federal Reserve",
+    description: "Daily amount value of RRP transactions reported by the New York Fed as part of the Temporary Open Market Operations.",
+    units: "Billions of Dollars"
+  }
+};
+
+/**
+ * Fetches economic data for a specific FRED series
+ * 
+ * @param seriesId - FRED series identifier (e.g., "CPIAUCSL")
+ * @param options - Query parameters for filtering the data
+ * @returns Formatted series data with metadata
+ */
+export async function fetchFREDSeriesData(
+  seriesId: string,
+  options: { 
+    start_date?: string; 
+    end_date?: string; 
+    limit?: number; 
+    sort_order?: "asc" | "desc" 
+  }
+) {
+  try {
+    // Prepare query parameters
+    const queryParams: Record<string, string | number | boolean> = {
+      series_id: seriesId
+    };
+
+    // Add optional parameters if provided
+    if (options.start_date) queryParams.observation_start = options.start_date;
+    if (options.end_date) queryParams.observation_end = options.end_date;
+    if (options.limit) queryParams.limit = options.limit;
+    if (options.sort_order) queryParams.sort_order = options.sort_order;
+
+    // Make the request to FRED API
+    const response = await makeRequest<SeriesObservationsResponse>(
+      "series/observations",
+      queryParams
+    );
+
+    // Get metadata for this series
+    const metadata = FRED_SERIES_REGISTRY[seriesId] || {
+      title: `FRED Data Series: ${seriesId}`,
+      description: `Economic data from FRED series ${seriesId}`,
+      units: "Value"
+    };
+
+    // Transform the data for easier consumption
+    const formattedData = response.observations.map(obs => ({
+      date: obs.date,
+      value: parseFloat(obs.value),
+      units: metadata.units,
+    }));
+
+    const responseData = {
+      title: metadata.title,
+      description: metadata.description,
+      source: "Federal Reserve Economic Data (FRED)",
+      series_id: seriesId,
+      total_observations: response.count,
+      data: formattedData
+    };
+
+    return {
+      content: [{ 
+        type: "text" as const, 
+        text: JSON.stringify(responseData, null, 2) 
+      }]
+    };
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to retrieve ${seriesId} data: ${error.message}`);
+    }
+    throw error;
+  }
+}
