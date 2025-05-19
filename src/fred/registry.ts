@@ -103,5 +103,10 @@ export const SERIES_REGISTRY: Record<string, FREDSeriesMetadata> = {
     title: "M1 Money Stock",
     description: "M1 consists of currency outside the U.S. Treasury, Federal Reserve Banks, and the vaults of depository institutions; demand deposits at commercial banks; and other liquid deposits.",
     units: "Billions of Dollars"
+  },
+  "DRCCLACBS": {
+    title: "Delinquency Rate on Credit Card Loans, All Commercial Banks",
+    description: "This series measures the percentage of credit card loans that are delinquent across all commercial banks in the United States. It provides insights into consumer financial health, credit card loan performance, and potential economic stress. This indicator is frequently used to track trends in consumer credit risk and serves as a potential leading indicator of economic conditions.",
+    units: "Percent, Seasonally Adjusted"
   }
 };

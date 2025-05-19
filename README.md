@@ -188,6 +188,15 @@ Install the server, for example, on [Claude Desktop](https://claude.ai/download)
     *   `limit` _(number, optional)_: Maximum number of observations to return.
     *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
 
+### `DRCCLACBS`
+
+*   **Description**: Retrieve data for *Delinquency Rate on Credit Card Loans, All Commercial Banks* (`DRCCLACBS`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
 ## Testing
 
 See [TESTING.md](./TESTING.md) for more details.
