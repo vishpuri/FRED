@@ -1,5 +1,4 @@
 import { z } from "zod";
-import fetch from "node-fetch";
 
 const BASE_URL = "https://api.stlouisfed.org/fred";
 
@@ -107,11 +106,11 @@ export const FRED_SERIES_REGISTRY: Record<string, FREDSeriesMetadata> = {
  */
 export async function fetchFREDSeriesData(
   seriesId: string,
-  options: { 
-    start_date?: string; 
-    end_date?: string; 
-    limit?: number; 
-    sort_order?: "asc" | "desc" 
+  options: {
+    start_date?: string;
+    end_date?: string;
+    limit?: number;
+    sort_order?: "asc" | "desc"
   }
 ) {
   try {
@@ -156,15 +155,14 @@ export async function fetchFREDSeriesData(
     };
 
     return {
-      content: [{ 
-        type: "text" as const, 
-        text: JSON.stringify(responseData, null, 2) 
+      content: [{
+        type: "text" as const,
+        text: JSON.stringify(responseData, null, 2)
       }]
     };
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`Failed to retrieve ${seriesId} data: ${error.message}`);
-    }
-    throw error;
+    // Handle all error types uniformly for better error messages
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    throw new Error(`Failed to retrieve ${seriesId} data: ${errorMessage}`);
   }
 }
