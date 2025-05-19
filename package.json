@@ -1,7 +1,7 @@
 {
   "name": "fred-mcp-server",
   "version": "0.4.0",
-  "description": "Federal Reserve Economic Data (FRED) MCP Server for fetching economic timeseries data",
+  "description": "Federal Reserve Economic Data (FRED) MCP Server for fetching economic timeseries data with comprehensive test coverage",
   "main": "build/index.js",
   "keywords": [
     "fred",
@@ -19,7 +19,13 @@
   "scripts": {
     "build": "tsc && chmod 755 build/index.js",
     "start": "node build/index.js",
-    "release": "release-it"
+    "release": "release-it",
+    "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest",
+    "test:watch": "node --experimental-vm-modules --no-warnings ./node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node --experimental-vm-modules --no-warnings ./node_modules/jest/bin/jest.js --coverage",
+    "test:detect": "node --experimental-vm-modules --no-warnings ./node_modules/jest/bin/jest.js --detectOpenHandles",
+    "test:registry": "node --experimental-vm-modules --no-warnings ./node_modules/jest/bin/jest.js test/unit/fred/registry.test.ts",
+    "test:client": "node --experimental-vm-modules --no-warnings ./node_modules/jest/bin/jest.js test/unit/fred/client.test.ts"
   },
   "files": [
     "build"
@@ -41,12 +47,17 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.11.2",
-    "node-fetch": "^3.3.2",
     "zod": "^3.24.4"
   },
   "devDependencies": {
-    "release-it": "^19.0.0",
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.15.17",
+    "jest": "^29.7.0",
+    "jest-environment-node": "^29.7.0",
+    "jest-fetch-mock": "^3.0.3",
+    "release-it": "^19.0.0",
+    "ts-jest": "^29.3.4",
     "typescript": "^5.8.3"
   },
   "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39"
