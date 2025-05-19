@@ -7,14 +7,7 @@ A Model Context Protocol (`MCP`) server for accessing Federal Reserve Economic D
 
 --- 
 
-<div align="center">
-  <a href="https://www.loom.com/share/33e4f01c3e224fdfa446a0f583ac47a4">
-    <p>FRED® MCP Server - Federal Reserve Liquidity Management</p>
-  </a>
-  <a href="https://www.loom.com/share/33e4f01c3e224fdfa446a0f583ac47a4">
-    <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/33e4f01c3e224fdfa446a0f583ac47a4-8af8403067354f6a-full-play.gif">
-  </a>
-</div>
+https://github.com/user-attachments/assets/66c7f3ad-7b0e-4930-b1c5-a675a7eb1e09
 
 ---
 
