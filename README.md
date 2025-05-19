@@ -5,12 +5,7 @@
 
 A Model Context Protocol (`MCP`) server for accessing Federal Reserve Economic Data ([FRED®](https://fred.stlouisfed.org/)) financial datasets.
 
---- 
-
 https://github.com/user-attachments/assets/66c7f3ad-7b0e-4930-b1c5-a675a7eb1e09
-
----
-
 
 > [!TIP]
 > If you use this project in your research or work, please cite it using the [CITATION.cff](CITATION.cff) file, or the APA format below:
