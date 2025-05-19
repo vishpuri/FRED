@@ -45,6 +45,7 @@ export function createServer() {
   registerSeriesTool(server, "DRCCLACBS");  // Delinquency Rate on Credit Card Loans
   registerSeriesTool(server, "DFII10");     // 10-Year TIPS Yield (Daily)
   registerSeriesTool(server, "FII10");      // 10-Year TIPS Yield (Monthly)
+  registerSeriesTool(server, "WFII10");     // 10-Year TIPS Yield (Weekly)
 
   // To add more series, simply add them here:
   // registerSeriesTool(server, "FEDFUNDS"); // Federal Funds Rate

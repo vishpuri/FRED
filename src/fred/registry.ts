@@ -118,5 +118,10 @@ export const SERIES_REGISTRY: Record<string, FREDSeriesMetadata> = {
     title: "Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Quoted on an Investment Basis, Inflation-Indexed",
     description: "This series measures the monthly inflation-adjusted interest rates on 10-year Treasury Inflation-Protected Securities (TIPS). Similar to DFII10 but at a monthly frequency, it represents the real yield investors require above inflation. This data helps in comparing real yields across different time periods and is crucial for understanding market expectations for real interest rates.",
     units: "Percent, Not Seasonally Adjusted"
+  },
+  "WFII10": {
+    title: "Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Quoted on an Investment Basis, Inflation-Indexed",
+    description: "This series measures the weekly inflation-adjusted interest rates on 10-year Treasury Inflation-Protected Securities (TIPS). Updated weekly with values ending on Friday, it provides more frequent observations than the monthly FII10 series but less granular than the daily DFII10 series. It helps track real interest rate movements over time, providing investors with insights into inflation-adjusted Treasury yields.",
+    units: "Percent, Not Seasonally Adjusted"
   }
 };
