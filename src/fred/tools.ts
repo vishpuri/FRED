@@ -39,7 +39,7 @@ export function registerSeriesTool(server: McpServer, seriesId: string) {
 
   // Register the series-specific tool
   server.tool(
-    seriesId, 
+    seriesId,
     `Retrieve data for ${metadata.title} (${seriesId}) from FRED`,
     QUERY_PARAMS_SCHEMA,
     // Handler with logging
@@ -61,7 +61,7 @@ export async function handleDynamicSeries(
   try {
     // Extract the series ID from input
     const { series_id, ...queryParams } = input;
-    
+
     // Call the data fetcher with the extracted parameters
     return await fetchSeriesData(series_id, queryParams);
   } catch (error) {
