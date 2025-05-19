@@ -199,7 +199,16 @@ Install the server, for example, on [Claude Desktop](https://claude.ai/download)
 
 ### `DFII10`
 
-*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed* (`DFII10`) from FRED®.
+*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Daily)* (`DFII10`) from FRED®.
+*   **Parameters**:
+    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
+    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
+    *   `limit` _(number, optional)_: Maximum number of observations to return.
+    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+
+### `FII10`
+
+*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Monthly)* (`FII10`) from FRED®.
 *   **Parameters**:
     *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
     *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
