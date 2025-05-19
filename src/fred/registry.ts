@@ -108,5 +108,10 @@ export const SERIES_REGISTRY: Record<string, FREDSeriesMetadata> = {
     title: "Delinquency Rate on Credit Card Loans, All Commercial Banks",
     description: "This series measures the percentage of credit card loans that are delinquent across all commercial banks in the United States. It provides insights into consumer financial health, credit card loan performance, and potential economic stress. This indicator is frequently used to track trends in consumer credit risk and serves as a potential leading indicator of economic conditions.",
     units: "Percent, Seasonally Adjusted"
+  },
+  "DFII10": {
+    title: "Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Quoted on an Investment Basis, Inflation-Indexed",
+    description: "This series measures the inflation-adjusted interest rates on 10-year Treasury securities. It provides daily data on real yield for Treasury Inflation-Protected Securities (TIPS), allowing investors to understand the real return on these securities without the effects of inflation. It is an important indicator for market expectations of real interest rates over a 10-year period.",
+    units: "Percent, Not Seasonally Adjusted"
   }
 };

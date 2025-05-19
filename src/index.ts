@@ -43,6 +43,7 @@ export function createServer() {
   registerSeriesTool(server, "FPCPITOTLZGUSA"); // US Inflation Rate
   registerSeriesTool(server, "M1SL");       // M1 Money Stock
   registerSeriesTool(server, "DRCCLACBS");  // Delinquency Rate on Credit Card Loans
+  registerSeriesTool(server, "DFII10");     // 10-Year TIPS Yield
 
   // To add more series, simply add them here:
   // registerSeriesTool(server, "FEDFUNDS"); // Federal Funds Rate
