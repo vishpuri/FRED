@@ -200,6 +200,18 @@ Install the server, for example, on [Claude Desktop](https://claude.ai/download)
     *   `limit` _(number, optional)_: Maximum number of observations to return.
     *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
 
+## Testing
+
+See [TESTING.md](./TESTING.md) for more details.
+
+```bash
+# Run all tests
+pnpm test
+
+# Run specific tests
+pnpm test:registry
+```
+
 ## 📄 License
 
 [Apache 2.0 License](LICENSE) © 2025 [Stefano Amorelli](https://amorelli.tech)
