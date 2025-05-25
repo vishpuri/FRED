@@ -65,185 +65,98 @@ Install the server, for example, on [Claude Desktop](https://claude.ai/download)
 
 ## Available Tools
 
+<details>
+<summary>Common Parameters</summary>
+
+All tools accept these optional parameters:
+
+* `start_date` (string): Start date in `YYYY-MM-DD` format.
+* `end_date` (string): End date in `YYYY-MM-DD` format.
+* `limit` (number): Maximum number of observations to return.
+* `sort_order` ("asc" | "desc"): Sort order of observations.
+
+</details>
+The following endpoints fetch individual FRED® series using these parameters.
+
 ### `RRPONTSYD`
 
-*   **Description**: Retrieve data for *Overnight Reverse Repurchase Agreements* (`RRPONTSYD`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *Overnight Reverse Repurchase Agreements* (`RRPONTSYD`)
 
 ### `CPIAUCSL`
 
-*   **Description**: Retrieve data for *Consumer Price Index for All Urban Consumers* (`CPIAUCSL`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *Consumer Price Index for All Urban Consumers* (`CPIAUCSL`)
 
 ### `MORTGAGE30US`
 
-*   **Description**: Retrieve data for *30-Year Fixed Rate Mortgage Average in the United States* (`MORTGAGE30US`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *30-Year Fixed Rate Mortgage Average in the United States* (`MORTGAGE30US`)
 
 ### `T10Y2Y`
 
-*   **Description**: Retrieve data for *10-Year Treasury Constant Maturity Minus 2-Year Treasury Constant Maturity* (`T10Y2Y`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *10-Year Treasury Constant Maturity Minus 2-Year Treasury Constant Maturity* (`T10Y2Y`)
 
 ### `UNRATE`
 
-*   **Description**: Retrieve data for *Unemployment Rate* (`UNRATE`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *Unemployment Rate* (`UNRATE`)
 
 ### `WALCL`
 
-*   **Description**: Retrieve data for *Federal Reserve Total Assets* (`WALCL`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *Federal Reserve Total Assets* (`WALCL`)
 
 ### `GDP`
 
-*   **Description**: Retrieve data for *Gross Domestic Product* (`GDP`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *Gross Domestic Product* (`GDP`)
 
 ### `GDPC1`
 
-*   **Description**: Retrieve data for *Real Gross Domestic Product* (`GDPC1`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *Real Gross Domestic Product* (`GDPC1`)
 
 ### `DGS10`
 
-*   **Description**: Retrieve data for *10-Year Treasury Constant Maturity Rate* (`DGS10`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *10-Year Treasury Constant Maturity Rate* (`DGS10`)
 
 ### `CSUSHPINSA`
 
-*   **Description**: Retrieve data for *S&P/Case-Shiller U.S. National Home Price Index* (`CSUSHPINSA`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *S&P/Case-Shiller U.S. National Home Price Index* (`CSUSHPINSA`)
 
 ### `BAMLH0A0HYM2`
 
-*   **Description**: Retrieve data for *ICE BofA US High Yield Index Option-Adjusted Spread* (`BAMLH0A0HYM2`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *ICE BofA US High Yield Index Option-Adjusted Spread* (`BAMLH0A0HYM2`)
 
 ### `T10YIE`
 
-*   **Description**: Retrieve data for *10-Year Breakeven Inflation Rate* (`T10YIE`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *10-Year Breakeven Inflation Rate* (`T10YIE`)
 
 ### `FPCPITOTLZGUSA`
 
-*   **Description**: Retrieve data for *Inflation, consumer prices for the United States* (`FPCPITOTLZGUSA`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *Inflation, consumer prices for the United States* (`FPCPITOTLZGUSA`)
 
 ### `MSPUS`
 
-*   **Description**: Retrieve data for *Median Sales Price of Houses Sold for the United States* (`MSPUS`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *Median Sales Price of Houses Sold for the United States* (`MSPUS`)
 
 ### `M1SL`
 
-*   **Description**: Retrieve data for *M1 Money Stock* (`M1SL`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *M1 Money Stock* (`M1SL`)
 
 ### `DRCCLACBS`
 
-*   **Description**: Retrieve data for *Delinquency Rate on Credit Card Loans, All Commercial Banks* (`DRCCLACBS`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *Delinquency Rate on Credit Card Loans, All Commercial Banks* (`DRCCLACBS`)
 
 ### `DFII10`
 
-*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Daily)* (`DFII10`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Daily)* (`DFII10`)
 
 ### `FII10`
 
-*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Monthly)* (`FII10`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Monthly)* (`FII10`)
 
 ### `WFII10`
 
-*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Weekly)* (`WFII10`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Weekly)* (`WFII10`)
 
 ### `RIFLGFCY10XIINA`
 
-*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Annual)* (`RIFLGFCY10XIINA`) from FRED®.
-*   **Parameters**:
-    *   `start_date` _(string, optional)_: Start date in `YYYY-MM-DD` format.
-    *   `end_date` _(string, optional)_: End date in `YYYY-MM-DD` format.
-    *   `limit` _(number, optional)_: Maximum number of observations to return.
-    *   `sort_order` _(enum["asc", "desc"], optional)_: Sort order of observations.
+*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Annual)* (`RIFLGFCY10XIINA`)
 
 ## Testing
 
