@@ -25,7 +25,8 @@
     "test:coverage": "node --experimental-vm-modules --no-warnings ./node_modules/jest/bin/jest.js --coverage",
     "test:detect": "node --experimental-vm-modules --no-warnings ./node_modules/jest/bin/jest.js --detectOpenHandles",
     "test:registry": "node --experimental-vm-modules --no-warnings ./node_modules/jest/bin/jest.js test/unit/fred/registry.test.ts",
-    "test:client": "node --experimental-vm-modules --no-warnings ./node_modules/jest/bin/jest.js test/unit/fred/client.test.ts"
+    "test:client": "node --experimental-vm-modules --no-warnings ./node_modules/jest/bin/jest.js test/unit/fred/client.test.ts",
+    "lint": "tsc --noEmit"
   },
   "files": [
     "build"
