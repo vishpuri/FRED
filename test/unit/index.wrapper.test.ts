@@ -105,3 +105,47 @@ describe('FREDServerWrapper', () => {
     expect(success).toBe(false);
   });
 });
+
+describe('FREDServerWrapper main function', () => {
+  // Mock process.exit
+  const originalExit = process.exit;
+  const mockExit = jest.fn() as any;
+  
+  // Mock console.error
+  const originalConsoleError = console.error;
+  const mockConsoleError = jest.fn();
+  
+  beforeEach(() => {
+    jest.clearAllMocks();
+    process.exit = mockExit;
+    console.error = mockConsoleError;
+  });
+  
+  afterEach(() => {
+    process.exit = originalExit;
+    console.error = originalConsoleError;
+  });
+  
+  test('main function handles server start failure', async () => {
+    // We can't easily test the main function directly due to module-level code
+    // But we can test that the wrapper handles failures correctly
+    const mockCreateServer = jest.fn().mockReturnValue({});
+    const mockStartServer = jest.fn().mockResolvedValue(false);
+    
+    const wrapper = new FREDServerWrapper(mockCreateServer, mockStartServer);
+    const success = await wrapper.createAndStart();
+    
+    expect(success).toBe(false);
+  });
+  
+  test('error in createAndStart is handled', async () => {
+    const mockCreateServer = jest.fn().mockImplementation(() => {
+      throw new Error('Create server error');
+    });
+    const mockStartServer = jest.fn();
+    
+    const wrapper = new FREDServerWrapper(mockCreateServer, mockStartServer);
+    
+    await expect(wrapper.createAndStart()).rejects.toThrow('Create server error');
+  });
+});
