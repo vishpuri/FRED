@@ -45,7 +45,7 @@
     "url": "https://github.com/stefanoamorelli/fred-mcp-server/issues",
     "email": "stefano@amorelli.tech"
   },
-  "license": "Apache-2.0",
+  "license": "AGPL-3.0",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.11.2",
     "zod": "^3.24.4"

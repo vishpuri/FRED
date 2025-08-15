@@ -65,98 +65,67 @@ Install the server, for example, on [Claude Desktop](https://claude.ai/download)
 
 ## Available Tools
 
-<details>
-<summary>Common Parameters</summary>
+This MCP server provides three comprehensive tools to access all 800,000+ FRED® economic data series:
 
-All tools accept these optional parameters:
+### `fred_browse`
 
-* `start_date` (string): Start date in `YYYY-MM-DD` format.
-* `end_date` (string): End date in `YYYY-MM-DD` format.
-* `limit` (number): Maximum number of observations to return.
-* `sort_order` ("asc" | "desc"): Sort order of observations.
+**Description**: Browse FRED's complete catalog through categories, releases, or sources.
 
-</details>
-The following endpoints fetch individual FRED® series using these parameters.
+**Parameters**:
+* `browse_type` (required): Type of browsing - "categories", "releases", "sources", "category_series", "release_series"
+* `category_id` (optional): Category ID for browsing subcategories or series within a category
+* `release_id` (optional): Release ID for browsing series within a release
+* `limit` (optional): Maximum number of results (default: 50)
+* `offset` (optional): Number of results to skip for pagination
+* `order_by` (optional): Field to order results by
+* `sort_order` (optional): "asc" or "desc"
 
-### `RRPONTSYD`
+### `fred_search`
 
-*   **Description**: Retrieve data for *Overnight Reverse Repurchase Agreements* (`RRPONTSYD`)
+**Description**: Search for FRED economic data series by keywords, tags, or filters.
 
-### `CPIAUCSL`
+**Parameters**:
+* `search_text` (optional): Text to search for in series titles and descriptions
+* `search_type` (optional): "full_text" or "series_id"
+* `tag_names` (optional): Comma-separated list of tag names to filter by
+* `exclude_tag_names` (optional): Comma-separated list of tag names to exclude
+* `limit` (optional): Maximum number of results (default: 25)
+* `offset` (optional): Number of results to skip for pagination
+* `order_by` (optional): Field to order by (e.g., "popularity", "last_updated")
+* `sort_order` (optional): "asc" or "desc"
+* `filter_variable` (optional): Filter by "frequency", "units", or "seasonal_adjustment"
+* `filter_value` (optional): Value to filter the variable by
 
-*   **Description**: Retrieve data for *Consumer Price Index for All Urban Consumers* (`CPIAUCSL`)
+### `fred_get_series`
 
-### `MORTGAGE30US`
+**Description**: Retrieve data for any FRED series by its ID with support for transformations and date ranges.
 
-*   **Description**: Retrieve data for *30-Year Fixed Rate Mortgage Average in the United States* (`MORTGAGE30US`)
+**Parameters**:
+* `series_id` (required): The FRED series ID (e.g., "GDP", "UNRATE", "CPIAUCSL")
+* `observation_start` (optional): Start date in YYYY-MM-DD format
+* `observation_end` (optional): End date in YYYY-MM-DD format
+* `limit` (optional): Maximum number of observations
+* `offset` (optional): Number of observations to skip
+* `sort_order` (optional): "asc" or "desc"
+* `units` (optional): Data transformation:
+  - "lin" (levels/no transformation)
+  - "chg" (change from previous period)
+  - "ch1" (change from year ago)
+  - "pch" (percent change)
+  - "pc1" (percent change from year ago)
+  - "pca" (compounded annual rate of change)
+  - "cch" (continuously compounded rate of change)
+  - "log" (natural log)
+* `frequency` (optional): Frequency aggregation ("d", "w", "m", "q", "a")
+* `aggregation_method` (optional): "avg" (average), "sum", or "eop" (end of period)
 
-### `T10Y2Y`
+## Example Usage
 
-*   **Description**: Retrieve data for *10-Year Treasury Constant Maturity Minus 2-Year Treasury Constant Maturity* (`T10Y2Y`)
-
-### `UNRATE`
-
-*   **Description**: Retrieve data for *Unemployment Rate* (`UNRATE`)
-
-### `WALCL`
-
-*   **Description**: Retrieve data for *Federal Reserve Total Assets* (`WALCL`)
-
-### `GDP`
-
-*   **Description**: Retrieve data for *Gross Domestic Product* (`GDP`)
-
-### `GDPC1`
-
-*   **Description**: Retrieve data for *Real Gross Domestic Product* (`GDPC1`)
-
-### `DGS10`
-
-*   **Description**: Retrieve data for *10-Year Treasury Constant Maturity Rate* (`DGS10`)
-
-### `CSUSHPINSA`
-
-*   **Description**: Retrieve data for *S&P/Case-Shiller U.S. National Home Price Index* (`CSUSHPINSA`)
-
-### `BAMLH0A0HYM2`
-
-*   **Description**: Retrieve data for *ICE BofA US High Yield Index Option-Adjusted Spread* (`BAMLH0A0HYM2`)
-
-### `T10YIE`
-
-*   **Description**: Retrieve data for *10-Year Breakeven Inflation Rate* (`T10YIE`)
-
-### `FPCPITOTLZGUSA`
-
-*   **Description**: Retrieve data for *Inflation, consumer prices for the United States* (`FPCPITOTLZGUSA`)
-
-### `MSPUS`
-
-*   **Description**: Retrieve data for *Median Sales Price of Houses Sold for the United States* (`MSPUS`)
-
-### `M1SL`
-
-*   **Description**: Retrieve data for *M1 Money Stock* (`M1SL`)
-
-### `DRCCLACBS`
-
-*   **Description**: Retrieve data for *Delinquency Rate on Credit Card Loans, All Commercial Banks* (`DRCCLACBS`)
-
-### `DFII10`
-
-*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Daily)* (`DFII10`)
-
-### `FII10`
-
-*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Monthly)* (`FII10`)
-
-### `WFII10`
-
-*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Weekly)* (`WFII10`)
-
-### `RIFLGFCY10XIINA`
-
-*   **Description**: Retrieve data for *Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Inflation-Indexed (Annual)* (`RIFLGFCY10XIINA`)
+With these three tools, you can:
+- Browse all economic categories and discover available data
+- Search for specific indicators by keywords or tags
+- Retrieve any of the 800,000+ series with custom transformations
+- Access real-time economic data including GDP, unemployment, inflation, interest rates, and more
 
 ## Testing
 
@@ -170,6 +139,15 @@ pnpm test
 pnpm test:registry
 ```
 
-## 📄 License
+## License ⚖️
 
-[Apache 2.0 License](LICENSE) © 2025 [Stefano Amorelli](https://amorelli.tech)
+This open-source project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0). This means:
+
+- You can use, modify, and distribute this software
+- If you modify and distribute it, you must release your changes under AGPL-3.0
+- If you run a modified version on a server, you must provide the source code to users
+- See the [LICENSE](LICENSE) file for full details
+
+For commercial licensing options or other licensing inquiries, please contact [stefano@amorelli.tech](mailto:stefano@amorelli.tech).
+
+© 2025 [Stefano Amorelli](https://amorelli.tech)
