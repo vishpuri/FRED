@@ -1,7 +1,7 @@
 {
   "name": "fred-mcp-server",
-  "version": "0.4.1",
-  "description": "Federal Reserve Economic Data (FRED) MCP Server for fetching economic timeseries data with comprehensive test coverage",
+  "version": "1.0.0",
+  "description": "Federal Reserve Economic Data (FRED) MCP Server - Access all 800,000+ economic time series with search, browse, and data retrieval capabilities",
   "main": "build/index.js",
   "keywords": [
     "fred",

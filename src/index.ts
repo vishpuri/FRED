@@ -1,6 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { registerSeriesTool, registerDynamicSeriesTool } from "./fred/tools.js";
+import { registerFREDTools } from "./fred/tools.js";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
@@ -27,33 +27,8 @@ export function createServer() {
     description: "Federal Reserve Economic Data (FRED) MCP Server for retrieving economic data series"
   });
 
-  // Register individual series tools
-  registerSeriesTool(server, "RRPONTSYD");  // Overnight Reverse Repurchase Agreements
-  registerSeriesTool(server, "CPIAUCSL");   // Consumer Price Index
-  registerSeriesTool(server, "MORTGAGE30US"); // 30-Year Fixed Rate Mortgage Average
-  registerSeriesTool(server, "T10Y2Y");     // 10-Year/2-Year Treasury Yield Spread
-  registerSeriesTool(server, "UNRATE");     // Unemployment Rate
-  registerSeriesTool(server, "WALCL");      // Federal Reserve Total Assets
-  registerSeriesTool(server, "GDP");        // Gross Domestic Product (nominal)
-  registerSeriesTool(server, "GDPC1");      // Real Gross Domestic Product (inflation-adjusted)
-  registerSeriesTool(server, "DGS10");      // 10-Year Treasury Constant Maturity Rate
-  registerSeriesTool(server, "CSUSHPINSA"); // Case-Shiller Home Price Index
-  registerSeriesTool(server, "BAMLH0A0HYM2"); // ICE BofA US High Yield Index OAS
-  registerSeriesTool(server, "T10YIE");     // 10-Year Breakeven Inflation Rate
-  registerSeriesTool(server, "FPCPITOTLZGUSA"); // US Inflation Rate
-  registerSeriesTool(server, "M1SL");       // M1 Money Stock
-  registerSeriesTool(server, "DRCCLACBS");  // Delinquency Rate on Credit Card Loans
-  registerSeriesTool(server, "DFII10");     // 10-Year TIPS Yield (Daily)
-  registerSeriesTool(server, "FII10");      // 10-Year TIPS Yield (Monthly)
-  registerSeriesTool(server, "WFII10");     // 10-Year TIPS Yield (Weekly)
-  registerSeriesTool(server, "RIFLGFCY10XIINA"); // 10-Year TIPS Yield (Annual)
-
-  // To add more series, simply add them here:
-  // registerSeriesTool(server, "FEDFUNDS"); // Federal Funds Rate
-  // registerSeriesTool(server, "M2SL");     // M2 Money Supply
-
-  // Register the dynamic series lookup tool
-  registerDynamicSeriesTool(server);
+  // Register FRED tools
+  registerFREDTools(server);
 
   return server;
 }

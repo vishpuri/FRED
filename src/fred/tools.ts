@@ -1,89 +1,146 @@
 /**
  * MCP Tool Definitions for FRED API
  * 
- * Defines and registers MCP tools for accessing FRED data
+ * Comprehensive tools for accessing any FRED data
  */
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { SERIES_REGISTRY } from "./registry.js";
-import { fetchSeriesData, FREDQueryOptions } from "./client.js";
+import { searchSeries, FREDSearchOptions } from "./search.js";
+import { getSeriesData, FREDSeriesOptions } from "./series.js";
+import { browseCategories, getCategorySeries, browseReleases, getReleaseSeries, browseSources } from "./browse.js";
 
 /**
- * Schema for FRED data query parameters
+ * Schema for FRED search tool
  */
-const QUERY_PARAMS_SCHEMA = {
-  start_date: z.string().optional().describe("Start date in YYYY-MM-DD format"),
-  end_date: z.string().optional().describe("End date in YYYY-MM-DD format"),
-  limit: z.number().optional().describe("Maximum number of observations to return"),
-  sort_order: z.enum(["asc", "desc"]).optional().describe("Sort order of observations")
+const SEARCH_SCHEMA = {
+  search_text: z.string().optional().describe("Text to search for in series titles and descriptions"),
+  search_type: z.enum(["full_text", "series_id"]).optional().describe("Type of search to perform"),
+  tag_names: z.string().optional().describe("Comma-separated list of tag names to filter by"),
+  exclude_tag_names: z.string().optional().describe("Comma-separated list of tag names to exclude"),
+  limit: z.number().min(1).max(1000).optional().default(25).describe("Maximum number of results to return"),
+  offset: z.number().min(0).optional().default(0).describe("Number of results to skip for pagination"),
+  order_by: z.enum([
+    "search_rank", "series_id", "title", "units", "frequency", 
+    "seasonal_adjustment", "realtime_start", "realtime_end", 
+    "last_updated", "observation_start", "observation_end", "popularity"
+  ]).optional().describe("Field to order results by"),
+  sort_order: z.enum(["asc", "desc"]).optional().describe("Sort order for results"),
+  filter_variable: z.enum(["frequency", "units", "seasonal_adjustment"]).optional().describe("Variable to filter by"),
+  filter_value: z.string().optional().describe("Value to filter the variable by")
 };
 
 /**
- * Schema for the dynamic series tool that requires a series_id parameter
+ * Schema for FRED series data tool
  */
-const DYNAMIC_TOOL_SCHEMA = {
-  series_id: z.string().describe("The FRED series ID to retrieve"),
-  ...QUERY_PARAMS_SCHEMA
+const SERIES_DATA_SCHEMA = {
+  series_id: z.string().describe("The FRED series ID to retrieve data for (e.g., 'GDP', 'UNRATE', 'CPIAUCSL')"),
+  observation_start: z.string().optional().describe("Start date for observations in YYYY-MM-DD format"),
+  observation_end: z.string().optional().describe("End date for observations in YYYY-MM-DD format"),
+  limit: z.number().min(1).max(100000).optional().describe("Maximum number of observations to return"),
+  offset: z.number().min(0).optional().describe("Number of observations to skip"),
+  sort_order: z.enum(["asc", "desc"]).optional().describe("Sort order of observations by date"),
+  units: z.enum([
+    "lin", "chg", "ch1", "pch", "pc1", "pca", "cch", "cca", "log"
+  ]).optional().describe("Data transformation: lin=levels, chg=change, pch=percent change, log=natural log"),
+  frequency: z.enum([
+    "d", "w", "bw", "m", "q", "sa", "a", 
+    "wef", "weth", "wew", "wetu", "wem", "wesu", "wesa", "bwew", "bwem"
+  ]).optional().describe("Frequency aggregation: d=daily, w=weekly, m=monthly, q=quarterly, a=annual"),
+  aggregation_method: z.enum(["avg", "sum", "eop"]).optional().describe("Aggregation method: avg=average, sum=sum, eop=end of period"),
+  output_type: z.number().min(1).max(4).optional().describe("Output format: 1=observations, 2=observations by vintage, 3=observations by release, 4=initial release only"),
+  vintage_dates: z.string().optional().describe("Vintage date or dates in YYYY-MM-DD format")
 };
 
 /**
- * Registers a tool for a specific FRED data series
+ * Schema for FRED browse tool
  */
-export function registerSeriesTool(server: McpServer, seriesId: string) {
-  // Get metadata for the series
-  const metadata = SERIES_REGISTRY[seriesId] || {
-    title: `FRED Data Series: ${seriesId}`,
-    description: `Economic data from FRED series ${seriesId}`,
-    units: "Value"
-  };
+const BROWSE_SCHEMA = {
+  browse_type: z.enum(["categories", "releases", "sources", "category_series", "release_series"]).describe("Type of browsing to perform"),
+  category_id: z.number().optional().describe("Category ID (for categories or category_series)"),
+  release_id: z.number().optional().describe("Release ID (for release_series)"),
+  limit: z.number().min(1).max(1000).optional().default(50).describe("Maximum number of results"),
+  offset: z.number().min(0).optional().default(0).describe("Number of results to skip"),
+  order_by: z.string().optional().describe("Field to order by"),
+  sort_order: z.enum(["asc", "desc"]).optional().describe("Sort order")
+};
 
-  // Register the series-specific tool
+/**
+ * Registers the simplified FRED tools with the MCP server
+ */
+export function registerFREDTools(server: McpServer) {
+  // Register browse tool for comprehensive navigation
   server.tool(
-    seriesId,
-    `Retrieve data for ${metadata.title} (${seriesId}) from FRED`,
-    QUERY_PARAMS_SCHEMA,
-    // Handler with logging
+    "fred_browse",
+    "Browse FRED's complete catalog through categories, releases, or sources. Use browse_type='categories' to explore the category tree, 'releases' for data releases, 'sources' for data sources, 'category_series' to get all series in a category, or 'release_series' to get all series in a release.",
+    BROWSE_SCHEMA,
+    async (input: any) => {
+      console.error(`fred_browse called with params: ${JSON.stringify(input)}`);
+      
+      switch (input.browse_type) {
+        case "categories":
+          return await browseCategories(input.category_id);
+        case "category_series":
+          if (!input.category_id) {
+            throw new Error("category_id is required for category_series");
+          }
+          return await getCategorySeries(input.category_id, {
+            limit: input.limit,
+            offset: input.offset,
+            order_by: input.order_by,
+            sort_order: input.sort_order
+          });
+        case "releases":
+          return await browseReleases({
+            limit: input.limit,
+            offset: input.offset,
+            order_by: input.order_by,
+            sort_order: input.sort_order
+          });
+        case "release_series":
+          if (!input.release_id) {
+            throw new Error("release_id is required for release_series");
+          }
+          return await getReleaseSeries(input.release_id, {
+            limit: input.limit,
+            offset: input.offset,
+            order_by: input.order_by,
+            sort_order: input.sort_order
+          });
+        case "sources":
+          return await browseSources({
+            limit: input.limit,
+            offset: input.offset,
+            order_by: input.order_by,
+            sort_order: input.sort_order
+          });
+        default:
+          throw new Error(`Invalid browse_type: ${input.browse_type}`);
+      }
+    }
+  );
+  
+  // Register search tool
+  server.tool(
+    "fred_search",
+    "Search for FRED economic data series by keywords, tags, or filters. Returns matching series with their IDs, titles, and metadata. Use this to find specific series when you know what you're looking for.",
+    SEARCH_SCHEMA,
     async (input) => {
-      console.error(`${seriesId} tool called with params: ${JSON.stringify(input)}`);
-      const result = await fetchSeriesData(seriesId, input);
-      console.error(`${seriesId} tool handling complete`);
+      console.error(`fred_search called with params: ${JSON.stringify(input)}`);
+      const result = await searchSeries(input as FREDSearchOptions);
+      console.error("fred_search complete");
       return result;
     }
   );
-}
-
-/**
- * Handles requests to the dynamic series tool
- */
-export async function handleDynamicSeries(
-  input: FREDQueryOptions & { series_id: string }
-) {
-  try {
-    // Extract the series ID from input
-    const { series_id, ...queryParams } = input;
-
-    // Call the data fetcher with the extracted parameters
-    return await fetchSeriesData(series_id, queryParams);
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`Failed to retrieve FRED series data: ${error.message}`);
-    }
-    throw error;
-  }
-}
-
-/**
- * Registers the dynamic series tool that can access any FRED series
- */
-export function registerDynamicSeriesTool(server: McpServer) {
+  
+  // Register series data tool
   server.tool(
-    "FREDSeries",
-    "Retrieve data for any FRED data series by providing its series ID",
-    DYNAMIC_TOOL_SCHEMA,
+    "fred_get_series",
+    "Retrieve data for any FRED series by its ID. Supports data transformations, frequency changes, and date ranges.",
+    SERIES_DATA_SCHEMA,
     async (input) => {
-      console.error(`FREDSeries tool called with params: ${JSON.stringify(input)}`);
-      const result = await handleDynamicSeries(input);
-      console.error("FREDSeries tool handling complete");
+      console.error(`fred_get_series called with params: ${JSON.stringify(input)}`);
+      const result = await getSeriesData(input as FREDSeriesOptions);
+      console.error("fred_get_series complete");
       return result;
     }
   );

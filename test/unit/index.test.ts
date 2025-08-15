@@ -42,31 +42,15 @@ describe('Server entry point', () => {
     // Check for key components in the server setup
     expect(content).toContain('McpServer');
     expect(content).toContain('StdioServerTransport');
-    expect(content).toContain('registerSeriesTool');
-    expect(content).toContain('registerDynamicSeriesTool');
+    expect(content).toContain('registerFREDTools');
     expect(content).toContain('export function createServer()');
     expect(content).toContain('export async function startServer');
   });
 
-  test('index file registers multiple FRED data series', () => {
+  test('index file registers FRED tools', () => {
     const content = fs.readFileSync(indexPath, 'utf-8');
 
-    // Check if all expected series are registered
-    const expectedSeries = [
-      'CPIAUCSL',
-      'RRPONTSYD',
-      'MORTGAGE30US',
-      'T10Y2Y',
-      'UNRATE',
-      'WALCL',
-      'GDP',
-      'GDPC1',
-      'DGS10'
-    ];
-
-    // Verify each series is registered
-    expectedSeries.forEach(series => {
-      expect(content).toContain(`registerSeriesTool(server, "${series}")`);
-    });
+    // Check for FRED tools registration
+    expect(content).toContain('registerFREDTools(server)');
   });
 });
