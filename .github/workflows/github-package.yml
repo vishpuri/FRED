@@ -57,7 +57,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: https://npm.pkg.github.com/
+          registry-url: 'https://npm.pkg.github.com/'
           
       - name: Install pnpm
         uses: pnpm/action-setup@v3
@@ -83,6 +83,16 @@ jobs:
       - name: Build
         run: pnpm build
         
+      - name: Configure npm for GitHub Packages
+        run: |
+          echo "@stefanoamorelli:registry=https://npm.pkg.github.com/" >> .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
+      
+      - name: Update package name for GitHub Packages
+        run: |
+          # Create a scoped version for GitHub packages
+          sed -i 's/"name": "fred-mcp-server"/"name": "@stefanoamorelli\/fred-mcp-server"/' package.json
+          
       - name: Publish to GitHub Packages
         run: pnpm publish --no-git-checks
         env:
