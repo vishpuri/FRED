@@ -9,14 +9,17 @@ RUN npm install -g pnpm
 # Copy package.json and lock files
 COPY package.json pnpm-lock.yaml* ./
 
-# Install only production dependencies initially
-RUN pnpm install --prod --ignore-scripts
+# Install all dependencies (including dev dependencies for build)
+RUN pnpm install --frozen-lockfile
 
 # Copy source code
 COPY . .
 
 # Build the project
 RUN pnpm run build
+
+# Remove dev dependencies after build
+RUN pnpm prune --prod
 
 # Expose no ports, use stdio
 
